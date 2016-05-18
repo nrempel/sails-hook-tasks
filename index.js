@@ -26,7 +26,7 @@ module.exports = function(sails) {
     });
 
     // For each task discovered, register with node-schedule
-    _.each(tasks).forEach(function(task) {
+    _.each(tasks, function(task) {
       schedule.scheduleJob(task.schedule, task.task);
     });
   }
