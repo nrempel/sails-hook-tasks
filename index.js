@@ -26,13 +26,12 @@ module.exports = function(sails) {
     });
 
     // For each task discovered, register with node-schedule
-    _.forEach(tasks).forEach(function(task) {
+    _.each(tasks).forEach(function(task) {
       schedule.scheduleJob(task.schedule, task.task);
     });
   }
 
   return {
-    
     defaults: {
       __configKey__: {
         // Activate or deactivate the hook
