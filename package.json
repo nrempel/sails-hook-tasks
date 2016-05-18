@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nrempel/sails-hook-tasks.git"
+    "url": "git+https://github.com/servmetrics/sails-hook-tasks.git"
   },
   "keywords": [
     "sails",
@@ -18,10 +18,10 @@
     "tasks",
     "schedule"
   ],
-  "author": "Nicholas Rempel <nbrempel@gmail.com>",
+  "author": "Servmetrics Ltd. <info@Servmetrics.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nrempel/sails-hook-tasks/issues"
+    "url": "https://github.com/servmetrics/sails-hook-tasks/issues"
   },
-  "homepage": "https://github.com/nrempel/sails-hook-tasks#readme"
+  "homepage": "https://github.com/servmetrics/sails-hook-tasks#readme"
 }
