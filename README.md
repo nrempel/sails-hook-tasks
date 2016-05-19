@@ -33,7 +33,10 @@ module.exports = {
 
 You can optionally configure the hook by creating a configuration file at `config/tasks.js`.
 
-Currently, only one configuration paramater is supported.
+Currently, there are two supported configuration parameters.
+
+- `active`: determines whether or not the hook will be loaded.
+- `eventsToWaitFor`: provide a list of events the hook shall wait for before loading itself.
 
 You can copy this into `config/tasks.js` if you want:
 
@@ -41,6 +44,9 @@ You can copy this into `config/tasks.js` if you want:
 module.exports.tasks = {
     // default: true
     active: true,
+    eventsToWaitFor: []
+    // or:
+    // eventsToWaitFor: ['hook:orm:loaded', 'hook:customHook:loaded']
 }
 ```
 
