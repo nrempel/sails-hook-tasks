@@ -12,21 +12,24 @@ module.exports = function(sails) {
   var _ = require('lodash');
 
   /**
-   * Discovers tasks at api/tasks and schedules them
+   * Discovers tasks at api/tasks and schedules them recursively
    *
    * @param {object} config Configuration object for this hook
    */
-  function initializeTasks(config) {
+  function initializeTasks(config, subdir) {
+    var subdir = subdir || '';
     // Find all tasks in `api/tasks`
     var tasks = require('require-all')({
-      dirname: sails.config.appPath + '/api/tasks',
-      filter: /(.+)\.js$/,
+      dirname: sails.config.appPath + '/api/tasks' + subdir,
+      filter: /(.+Task)\.js$/,
       excludeDirs: /^\.(git|svn)$/,
       recursive: true
     });
 
     // For each task discovered, register with node-schedule
-    _.each(tasks, function(task) {
+    _.each(tasks, function(task, key) {
+      // If this current iteration is itself a directory, recurse
+      if (typeof task === object) initializeTasks(config, subdir + '/' + key);
       schedule.scheduleJob(task.schedule, task.task);
     });
   }
