@@ -55,9 +55,9 @@ module.exports = function(sails) {
       // Notify when loaded correctly
       sails.on('lifted', function() {
         sails.log('sails-hook-tasks loaded successfully');
+        done();
       });
 
-      done();
     },
 
     reload: function(done) {
