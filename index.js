@@ -37,6 +37,8 @@ module.exports = function(sails) {
       __configKey__: {
         // Activate or deactivate the hook
         active: true,
+        // Which events we want to wait for before loading
+        eventsToWaitFor: []
       }
     },
 
@@ -52,12 +54,15 @@ module.exports = function(sails) {
       // Register our tasks
       initializeTasks();
 
-      // Notify when loaded correctly
-      sails.on('lifted', function() {
-        sails.log('sails-hook-tasks loaded successfully');
+      var eventsToWaitFor = config.eventsToWaitFor;
+      sails.after(eventsToWaitFor, function() {
+        // Notify when loaded correctly
+        sails.on('lifted', function() {
+          sails.log('sails-hook-tasks loaded successfully');
+        });
+
         done();
       });
-
     },
 
     reload: function(done) {
