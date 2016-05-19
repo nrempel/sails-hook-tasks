@@ -16,11 +16,10 @@ module.exports = function(sails) {
    *
    * @param {object} config Configuration object for this hook
    */
-  function initializeTasks(config, subdir) {
-    var subdir = subdir || '';
+  function initializeTasks() {
     // Find all tasks in `api/tasks`
     var tasks = require('require-all')({
-      dirname: sails.config.appPath + '/api/tasks' + subdir,
+      dirname: sails.config.appPath + '/api/tasks',
       filter: /(.+Task)\.js$/,
       excludeDirs: /^\.(git|svn)$/,
       recursive: true
@@ -28,8 +27,7 @@ module.exports = function(sails) {
 
     // For each task discovered, register with node-schedule
     _.each(tasks, function(task, key) {
-      // If this current iteration is itself a directory, recurse
-      if (typeof task === object) initializeTasks(config, subdir + '/' + key);
+      // TODO: support recursive task discovery
       schedule.scheduleJob(task.schedule, task.task);
     });
   }
@@ -52,7 +50,7 @@ module.exports = function(sails) {
       }
 
       // Register our tasks
-      initializeTasks(config);
+      initializeTasks();
 
       // Notify when loaded correctly
       sails.on('lifted', function() {
