@@ -51,11 +51,12 @@ module.exports = function(sails) {
         return done();
       }
 
-      // Register our tasks
-      initializeTasks();
-
       var eventsToWaitFor = config.eventsToWaitFor;
       sails.after(eventsToWaitFor, function() {
+
+        // Register our tasks
+        initializeTasks();
+
         // Notify when loaded correctly
         sails.on('lifted', function() {
           sails.log('sails-hook-tasks loaded successfully');
