@@ -20,7 +20,7 @@ module.exports = function(sails) {
     // Find all tasks in `api/tasks`
     var tasks = require('require-all')({
       dirname: sails.config.appPath + '/api/tasks',
-      filter: /(.+Task)\.js$/,
+      filter: /(.+)\.js$/,
       excludeDirs: /^\.(git|svn)$/,
       recursive: true
     });
