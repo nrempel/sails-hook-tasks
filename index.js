@@ -18,11 +18,11 @@ module.exports = function(sails) {
    */
   function initializeTasks(config) {
     // Find all tasks in `api/tasks`
-    var tasks = require('include-all')({
+    var tasks = require('require-all')({
       dirname: sails.config.appPath + '/api/tasks',
       filter: /(.+Task)\.js$/,
       excludeDirs: /^\.(git|svn)$/,
-      optional: true
+      recursive: true
     });
 
     // For each task discovered, register with node-schedule
